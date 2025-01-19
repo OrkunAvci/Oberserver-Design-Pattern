@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+	<h3 class="text-center">Create Notification</h3>
+	<form method="POST" action="{% url 'Subscriptions:notify' %}">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="notificationContent">Content</label>
+			<textarea class="form-control" id="notificationContent" name="content" rows="4" required></textarea>
+		</div>
+		<button type="submit" class="btn btn-primary mt-3">Send Notification</button>
+	</form>
+
+	<!-- Subscribers list section -->
+	<hr>
+	<h4 class="text-center mt-4">Subscribers List</h4>
+	<ul class="list-group mt-3">
+		{% for subscriber in subscribers %}
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{{ subscriber }}
+		</li>
+		{% empty %}
+		<li class="list-group-item text-center">No subscribers found.</li>
+		{% endfor %}
+	</ul>
+</div>
+
+{% endblock %}

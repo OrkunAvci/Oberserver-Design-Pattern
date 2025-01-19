@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+	<h2>{{ profile.user.username }}'s Profile</h2>
+
+	<div class="row">
+		<!-- Subscribed to (Publishers) -->
+		<div class="col-md-6">
+			<h3>Subscribed to:</h3>
+			<ul class="list-group">
+				{% for publisher in publishers %}
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					{{ publisher.user.username }}
+					<form action="{% url 'Subscriptions:profile' %}" method="POST">
+						{% csrf_token %}
+						<input type="hidden" name="target_profile_id" value="{{ publisher.id }}">
+						<button type="submit" class="btn btn-danger btn-sm" name="action" value="unsubscribe">
+							Unsubscribe
+						</button>
+					</form>
+				</li>
+				{% empty %}
+				<li class="list-group-item">You are not subscribed to any profiles yet.</li>
+				{% endfor %}
+			</ul>
+		</div>
+
+		<!-- Subscribers -->
+		<div class="col-md-6">
+			<h3>Subscribers:</h3>
+			<ul class="list-group mt-4">
+				{% for subscriber in subscribers %}
+				<li class="list-group-item">
+					{{ subscriber.user.username }}
+				</li>
+				{% empty %}
+				<li class="list-group-item">No one has subscribed to you yet.</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="text-center mt-4">
+		<form action="{% url 'Subscriptions:logout' %}" method="POST">
+			{% csrf_token %}
+			<button type="submit" class="btn btn-danger btn-lg" style="border-radius: 15px;">
+				Logout
+			</button>
+		</form>
+	</div>
+
+</div>
+
+
+
+{% endblock %}

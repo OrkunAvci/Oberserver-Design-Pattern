@@ -1,0 +1,23 @@
+{% load notification_tag %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark container-fluid">
+	<div class="d-flex justify-content-between w-100">
+		<div class="navbar-nav">
+			<a class="nav-item text-white p-3 text-decoration-none" href="{% url 'Subscriptions:index' %}">Home</a>
+			{% if user.is_authenticated %}
+			<a class="nav-item text-white p-3 text-decoration-none" href="{% url 'Subscriptions:notify' %}">Notify</a>
+			{% endif %}
+		</div>
+		<div class="navbar-nav">
+			{% if user.is_authenticated %}
+			<!-- Notifications Dropdown -->
+			<li class="nav-item">
+				{% show_notifications user %}
+			</li>
+			<a class="nav-item text-white p-3 text-decoration-none" href="{% url 'Subscriptions:profile' %}">Profile</a>
+			{% endif %}
+			{% if not user.is_authenticated %}
+			<a class="nav-item text-white p-3 text-decoration-none" href="{% url 'Subscriptions:login' %}">Login</>
+				{% endif %}
+		</div>
+	</div>
+</nav>

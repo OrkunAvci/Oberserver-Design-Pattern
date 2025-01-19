@@ -1,0 +1,27 @@
+<a class="nav-link dropdown-toggle dropdown text-white p-3 text-decoration-none" href="#" role="button"
+	data-bs-toggle="dropdown" aria-expanded="false">
+	Notifications
+</a>
+<ul class="dropdown-menu dropdown-menu-end bg-transparent border-0 shadow-none">
+	{% for notification in notifications|slice:":5" %}
+	<li>
+		<a class="dropdown-item" href="#">
+			<div class="card bg-dark text-white border-light" style="width: 18rem;">
+				<div class="card-header bg-secondary text-white">
+					<div class="d-flex justify-content-between w-100">
+						<div>{{ notification.publisher.profile.user.username }}</div>
+						<div class="text-muted small">{{ notification.timestamp }}</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">{{ notification.content|truncatechars:25 }}</h5>
+				</div>
+			</div>
+		</a>
+	</li>
+	{% empty %}
+	<li>
+		<a class="dropdown-item text-white bg-dark border-light" href="#">No notifications</a>
+	</li>
+	{% endfor %}
+</ul>
