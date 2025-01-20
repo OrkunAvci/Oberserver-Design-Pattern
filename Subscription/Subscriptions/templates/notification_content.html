@@ -2,12 +2,12 @@
 	data-bs-toggle="dropdown" aria-expanded="false">
 	Notifications
 </a>
-<ul class="dropdown-menu dropdown-menu-end bg-transparent border-0 shadow-none">
+<ul class="dropdown-menu dropdown-menu-end bg-transparent border-0 shadow-none mx-4">
 	{% for notification in notifications|slice:":5" %}
 	<li>
 		<a class="dropdown-item" href="#">
-			<div class="card bg-dark text-white border-light" style="width: 18rem;">
-				<div class="card-header bg-secondary text-white">
+			<div class="card bg-secondary text-white border-light" style="width: 18rem;">
+				<div class="card-header bg-dark text-white">
 					<div class="d-flex justify-content-between w-100">
 						<div>{{ notification.publisher.profile.user.username }}</div>
 						<div class="text-muted small">{{ notification.timestamp }}</div>
@@ -24,4 +24,13 @@
 		<a class="dropdown-item text-white bg-dark border-light" href="#">No notifications</a>
 	</li>
 	{% endfor %}
+	<li>
+		<a class="dropdown-item p-0" href="{% url 'Subscriptions:notification' %}">
+			<div class="card bg-dark text-white text-center border-light">
+				<div class="card-body">
+					All Notifications
+				</div>
+			</div>
+		</a>
+	</li>
 </ul>

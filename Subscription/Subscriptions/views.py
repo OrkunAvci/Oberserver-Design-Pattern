@@ -115,3 +115,9 @@ def notify(request):
 			return redirect('Subscriptions:notify')
 
 	return render(request, 'notify.html', context)
+
+@login_required
+def notification(request):
+	notifications = Notification.objects.filter(receiver=request.user.profile.subscriber, is_read=False).order_by('-timestamp')
+	context = {'notifications': notifications}
+	return render(request, 'notification.html', context=context)

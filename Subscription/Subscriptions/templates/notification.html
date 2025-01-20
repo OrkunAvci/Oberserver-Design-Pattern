@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-md mt-5 text-center" style="max-width: 1080px;">
+	<h2>Notifications</h2>
+	{% for notification in notifications %}
+	<div class="card bg-dark text-white border-light my-4">
+		<div class="card-header bg-secondary text-white">
+			<div class="d-flex justify-content-between">
+				<div>{{ notification.publisher.profile.user.username }}</div>
+				<div class="text-muted small">{{ notification.timestamp }}</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<h5 class="card-title">{{ notification.content }}</h5>
+		</div>
+	</div>
+	{% empty %}
+	<li>
+		<a class="dropdown-item text-white bg-dark border-light" href="#">No notifications</a>
+	</li>
+	{% endfor %}
+</div>
+
+{% endblock %}
